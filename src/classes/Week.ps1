@@ -8,8 +8,42 @@ Class PoshTimeWeek {
     [PoshTimeDay]$Saturday
     [int]$NormalHours = 40
 
-    PoshTimeWeek(){
+    PoshTimeWeek(
+        [PoshTimeDay]$Sunday,
+        [PoshTimeDay]$Monday,
+        [PoshTimeDay]$Tuesday,
+        [PoshTimeDay]$Wednesday,
+        [PoshTimeDay]$Thursday,
+        [PoshTimeDay]$Friday,
+        [PoshTimeDay]$Saturday
+    ){
+        $this.Sunday = $Sunday
+        $this.Monday = $Monday
+        $this.Tuesday = $Tuesday
+        $this.Wednesday = $Wednesday
+        $this.Thursday = $Thursday
+        $this.Friday = $Friday
+        $this.Saturday = $Saturday
+    }
 
+    PoshTimeWeek(
+        [PoshTimeDay]$Sunday,
+        [PoshTimeDay]$Monday,
+        [PoshTimeDay]$Tuesday,
+        [PoshTimeDay]$Wednesday,
+        [PoshTimeDay]$Thursday,
+        [PoshTimeDay]$Friday,
+        [PoshTimeDay]$Saturday,
+        [int]$NormalHours
+    ){
+        $this.Sunday = $Sunday
+        $this.Monday = $Monday
+        $this.Tuesday = $Tuesday
+        $this.Wednesday = $Wednesday
+        $this.Thursday = $Thursday
+        $this.Friday = $Friday
+        $this.Saturday = $Saturday
+        $this.NormalHours = $NormalHours
     }
 
     [timespan]TotalTime(){
