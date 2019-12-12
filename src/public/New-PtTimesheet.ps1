@@ -1,7 +1,16 @@
 Function New-PtTimeSheet {
-    [cmdletbinding()]
+    [cmdletbinding(
+        DefaultParameterSetName = 'Fresh'
+    )]
     Param (
+        [Parameter(
+            ParameterSetName = 'Existing'
+        )]
         [PoshTimePayPeriod[]]$PayPeriods
     )
-    [PoshTimeTimesheet]::new($PayPeriods)
+    if ($PSCmdlet.ParameterSetName -eq 'Existing') {
+        [PoshTimeTimesheet]::new($PayPeriods)
+    } elseif ($PSCmdlet.ParameterSetName -eq 'Fresh') {
+        
+    }
 }
