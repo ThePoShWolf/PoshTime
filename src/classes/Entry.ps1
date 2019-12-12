@@ -27,4 +27,12 @@ Class PoshTimeEntry {
     [timespan] Time(){
         Return ($this.End - $this.Start)
     }
+    
+    [string] ToJson(){
+        return [ordered]@{
+            Date = $this.Date.ToShortDateString()
+            Start = "$($this.Start.Hours.ToString().PadLeft(2,'0'))$($this.Start.Minutes.ToString().PadLeft(2,'0'))"
+            End = "$($this.End.Hours.ToString().PadLeft(2,'0'))$($this.End.Minutes.ToString().PadLeft(2,'0'))"
+        } | ConvertTo-Json
+    }
 }
