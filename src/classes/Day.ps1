@@ -24,4 +24,15 @@ Class PoshTimeDay {
         $secondSum = $totals | Measure-Object -Property Seconds -Sum
         Return (New-TimeSpan -Seconds $secondSum)
     }
+
+    [System.Collections.Specialized.OrderedDictionary] ToJsonObject(){ 
+        return [ordered]@{
+            Day = $this.Day.ToShortDateString()
+            Entries = $this.Entries | %{$_.ToJsonObject()}
+        }
+    }
+    
+    [string] ToJson(){
+        return $this.ToJsonObject() | ConvertTo-Json
+    }
 }

@@ -59,4 +59,20 @@ Class PoshTimeWeek {
         }
         
     }
+
+    [System.Collections.Specialized.OrderedDictionary] ToJsonObject(){
+        return [ordered]@{
+            Sunday = $this.Sunday.ToJsonObject()
+            Monday = $this.Monday.ToJsonObject()
+            Tuesday = $this.Tuesday.ToJsonObject()
+            Wednesday = $this.Wednesday.ToJsonObject()
+            Thursday = $this.Thursday.ToJsonObject()
+            Friday = $this.Friday.ToJsonObject()
+            Saturday = $this.Saturday.ToJsonObject()
+        }
+    }
+
+    [string] ToJson(){
+        return $this.ToJsonObject() | ConvertTo-Json
+    }
 }

@@ -22,17 +22,40 @@ Class PoshTimeEntry {
         }
 
     }
+
+    PoshTimeEntry(
+        [string]$Start,
+        [string]$End,
+        [datetime]$Date
+    ) {
+        $timeRegex = '^(?<hour>\d\d)\:?(?<minute>\d\d)\:?(?<seconds>\d\d)?$'
+        $this.Date = $Date
+        if ($start -match $timeRegex) {
+            $this.Start = New-TimeSpan -Hours $Matches.hour -Minutes $Matches.minute
+        } else {
+            Throw 'Unexpected start time format'
+        }
+        if ($end -match $timeRegex) {
+            $this.End = New-TimeSpan -Hours $Matches.hour -Minutes $Matches.minute
+        } else {
+            Throw 'Unexpected start time format'
+        }
+    }
     #endregion
 
     [timespan] Time(){
         Return ($this.End - $this.Start)
     }
     
-    [string] ToJson(){
+    [System.Collections.Specialized.OrderedDictionary] ToJsonObject(){
         return [ordered]@{
             Date = $this.Date.ToShortDateString()
             Start = "$($this.Start.Hours.ToString().PadLeft(2,'0'))$($this.Start.Minutes.ToString().PadLeft(2,'0'))"
             End = "$($this.End.Hours.ToString().PadLeft(2,'0'))$($this.End.Minutes.ToString().PadLeft(2,'0'))"
-        } | ConvertTo-Json
+        }
+    }
+
+    [string] ToJson(){
+        return $this.ToJsonObject() | ConvertTo-Json
     }
 }
