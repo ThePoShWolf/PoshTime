@@ -20,7 +20,11 @@ Class PoshTimeDay {
     [void] AddEntry(
         [PoshTimeEntry]$Entry
     ){
-        $this.Entries.Add($Entry)
+        if ($this.Entries.Count -lt 1) {
+            $this.Entries = $Entry
+        } else {
+            $this.Entries.Add($Entry)
+        }
     }
 
     [timespan] TotalTime(){
