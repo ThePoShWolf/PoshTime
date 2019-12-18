@@ -8,7 +8,13 @@ Function New-PtEntry {
         [Parameter(
             Position = 1
         )]
-        [string]$End
+        [string]$End,
+        [Parameter()]
+        $Date
     )
-    [PoshTimeEntry]::New($Start,$End)
+    if ($PSBoundParameters.Keys -contains 'Date'){
+        [PoshTimeEntry]::New($Start,$End,$Date)    
+    } else {
+        [PoshTimeEntry]::New($Start,$End)
+    }
 }
