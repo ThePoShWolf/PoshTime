@@ -1,5 +1,5 @@
 Class PoshTimeDay {
-    [PoshTimeEntry[]]$Entries
+    [System.Collections.Generic.List[PoshTimeEntry]]$Entries
     [datetime]$Day
 
     PoshTimeDay(
@@ -15,6 +15,12 @@ Class PoshTimeDay {
     ){
         $this.Entries = $Entries
         $this.Day = (Get-Date $Date).Date
+    }
+
+    [void] AddEntry(
+        [PoshTimeEntry]$Entry
+    ){
+        $this.Entries.Add($Entry)
     }
 
     [timespan] TotalTime(){
