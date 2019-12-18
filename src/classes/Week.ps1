@@ -46,6 +46,17 @@ Class PoshTimeWeek {
         $this.NormalHours = $NormalHours
     }
 
+    [void] SetDay(
+        [string]$DayOfWeek,
+        [PoshTimeDay]$Day
+    ){
+        if ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' -notcontains $DayOfWeek) {
+            Throw 'Was not a valid day of week.'
+        } else {
+            $this."$DayOfWeek" = $Day
+        }
+    }
+
     [timespan]TotalTime(){
         return $this.Sunday.TotalTime() + $this.Monday.TotalTime() + $this.Tuesday.TotalTime() + $this.Wednesday.TotalTime() + $this.Thursday.TotalTime() + $this.Friday.TotalTime() + $this.Saturday.TotalTime()
     }
