@@ -14,6 +14,6 @@ Class PoshTimeTimesheet {
     }
 
     [string] ToJson(){
-        return $This.ToJsonObject() | ConvertTo-Json
+        return $This.ToJsonObject() | ConvertTo-Json -Depth 8
     }
 }

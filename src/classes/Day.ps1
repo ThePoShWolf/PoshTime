@@ -35,14 +35,18 @@ Class PoshTimeDay {
         Return (New-TimeSpan -Seconds $secondSum)
     }
 
-    [System.Collections.Specialized.OrderedDictionary] ToJsonObject(){ 
-        return [ordered]@{
-            Day = $this.Day.ToShortDateString()
-            Entries = $this.Entries | %{$_.ToJsonObject()}
+    [System.Collections.Specialized.OrderedDictionary] ToJsonObject(){
+        if ($this.Entries.Count -gt 0){
+            return [ordered]@{
+                Day = $this.Day.ToShortDateString()
+                Entries = $this.Entries | %{$_.ToJsonObject()}
+            }
+        } else {
+            return [ordered]@{}
         }
     }
     
     [string] ToJson(){
-        return $this.ToJsonObject() | ConvertTo-Json
+        return $this.ToJsonObject() | ConvertTo-Json -Depth 5
     }
 }

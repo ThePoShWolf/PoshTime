@@ -21,13 +21,13 @@ Class PoshTimePayPeriod {
     }
 
     [System.Collections.Specialized.OrderedDictionary] ToJsonObject(){
-        return [ordered]@{
+        return $([ordered]@{
             Week1 = $this.Week1.ToJsonObject()
             Week2 = $this.Week2.ToJsonObject()
-        }
+        })
     }
 
     [string] ToJson(){
-        return $this.ToJsonObject() | ConvertTo-Json
+        return $this.ToJsonObject() | ConvertTo-Json -Depth 7
     }
 }
