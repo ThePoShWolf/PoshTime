@@ -8,6 +8,8 @@ Class PoshTimeWeek {
     [PoshTimeDay]$Saturday
     [int]$NormalHours = 40
 
+    PoshTimeWeek(){}
+
     PoshTimeWeek(
         [PoshTimeDay]$Sunday,
         [PoshTimeDay]$Monday,
