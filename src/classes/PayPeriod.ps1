@@ -21,10 +21,20 @@ Class PoshTimePayPeriod {
     }
 
     [System.Collections.Specialized.OrderedDictionary] ToJsonObject(){
-        return $([ordered]@{
-            Week1 = $this.Week1.ToJsonObject()
-            Week2 = $this.Week2.ToJsonObject()
-        })
+        if ($null -ne $this.Week1) {
+            if ($null -ne $this.Week2) {
+                return $([ordered]@{
+                    Week1 = $this.Week1.ToJsonObject()
+                    Week2 = $this.Week2.ToJsonObject()
+                })
+            } else {
+                return $([ordered]@{
+                    Week1 = $this.Week1.ToJsonObject()
+                })
+            }
+        } else {
+            return $([ordered]@{})
+        }
     }
 
     [string] ToJson(){
