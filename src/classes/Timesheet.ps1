@@ -9,7 +9,7 @@ Class PoshTimeTimesheet {
 
     [System.Collections.Specialized.OrderedDictionary] ToJsonObject(){
         return [ordered]@{
-            PayPeriods = $this.PayPeriods | %{$_.ToJsonObject()}
+            PayPeriods = $this.PayPeriods | Where-Object {$null -ne $_} | ForEach-Object {$_.ToJsonObject()}
         }
     }
 
