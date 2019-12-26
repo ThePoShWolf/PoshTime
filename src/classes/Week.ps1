@@ -51,7 +51,7 @@ Class PoshTimeWeek {
         [PoshTimeDay]$Day
     ){
         if ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' -notcontains $DayOfWeek) {
-            Throw 'Was not a valid day of week.'
+            Throw "'$DayOfWeek' is not a valid day of week."
         } else {
             $this."$DayOfWeek" = $Day
         }
